@@ -1,5 +1,5 @@
 package trabalhinho1;
 
 public class Box {
-	hduhuhuhuhuhuhuhdsdsdsdsd
+	private int id;
 }
