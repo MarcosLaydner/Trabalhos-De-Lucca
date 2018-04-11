@@ -7,7 +7,6 @@ public class Box {
 	private Box previous;
 	
 	public Box(Box previous, Person data, Box next) {
-		
 		this.next = next;
 		this.data = data;
 		this.previous = previous;
