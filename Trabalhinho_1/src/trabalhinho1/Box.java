@@ -1,15 +1,12 @@
 package trabalhinho1;
 
 public class Box {
-
-	private int id;
-
 	
 	private Box next;
-	private Person data;
+	private IBox data;
 	private Box previous;
 	
-	public Box(Box previous, Person data, Box next) {
+	public Box(Box previous, IBox data, Box next) {
 		this.next = next;
 		this.data = data;
 		this.previous = previous;
@@ -23,11 +20,11 @@ public class Box {
 		this.next = next;
 	}
 
-	public Person getData() {
+	public IBox getData() {
 		return data;
 	}
 
-	public void setData(Person data) {
+	public void setData(IBox data) {
 		this.data = data;
 	}
 
