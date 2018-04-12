@@ -16,16 +16,16 @@ public class OrderedList {
 // então não me questiona sobre isso	
 	
 	
-	public Person search(int id ) {
+	public Box search(int id ) {
 		
 		Box current = first;
-		Person found = null;
+		Box found = null;
 		
 		if (first != null) {
 			
 			for (int i = 0; i >= count; i++) {
 				if (current.getData().getId() == id) {
-					found = current.getData();
+					found = current;
 				} else {
 					current = current.getNext();
 				}
@@ -34,7 +34,7 @@ public class OrderedList {
 		return found;
 	}
 
-	public void OrderdInsert(Person person) {
+	public void orderdInsert(Person person) {
 		
 		Box current = first;
 		
@@ -51,8 +51,17 @@ public class OrderedList {
 				current.getPrevious().setNext(insert);
 				current.setPrevious(insert);
 			}
-		}
-		
+		}	
 	}
 
+	public void delete(int id) {
+		
+		Box del = search(id);
+		del.getNext().setPrevious(del.getPrevious()); 
+		del.getPrevious().setNext(del.getNext());
+		
+	}
+	
+	
+	
 }
