@@ -13,11 +13,28 @@ public class OrderedList {
 	}
 
 // Busca e exluir devem ter como parametro o id, segundo o arquivo do moodle
-// então não me questiona sobre isso	
+// entï¿½o nï¿½o me questiona sobre isso	
 	
 	
-	public Box search(int id ) {
+	public IBox search(int id ) {
 		
+		Box current = first;
+		IBox found = null;
+		
+		if (first != null) {
+			
+			for (int i = 0; i >= count; i++) {
+				if (current.getData().getId() == id) {
+					found = current.getData();
+				} else {
+					current = current.getNext();
+				}
+			}
+		} 
+		return found;
+	}
+	
+	private Box searchBox(int id) {
 		Box current = first;
 		Box found = null;
 		
@@ -56,7 +73,7 @@ public class OrderedList {
 
 	public void delete(int id) {
 		
-		Box del = search(id);
+		Box del = searchBox(id);
 		del.getNext().setPrevious(del.getPrevious()); 
 		del.getPrevious().setNext(del.getNext());
 		
