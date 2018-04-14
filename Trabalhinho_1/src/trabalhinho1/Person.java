@@ -1,6 +1,6 @@
 package trabalhinho1;
 
-public class Person implements IBox {
+public class Person implements datatype {
 	
 	private int id;
 	private String name;

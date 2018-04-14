@@ -1,39 +1,53 @@
 package trabalhinho1;
 
-public class Box {
+public class Box<dt> {
 	
-	private Box next;
-	private IBox data;
-	private Box previous;
+	private Box<datatype> next;
+	private datatype data;
+	private Box<datatype> previous;
 	
-	public Box(Box previous, IBox data, Box next) {
+	public Box(Box<datatype> previous, datatype data, Box<datatype> next) {
 		this.next = next;
 		this.data = data;
 		this.previous = previous;
 	}
 
-	public Box getNext() {
+	public Box<datatype> getNext() {
+		
 		return next;
 	}
 
-	public void setNext(Box next) {
+	public void setNext(Box<datatype> next) {
 		this.next = next;
 	}
 
-	public IBox getData() {
+	public datatype getData() {
 		return data;
 	}
 
-	public void setData(IBox data) {
+	public void setData(datatype data) {
 		this.data = data;
 	}
 
-	public Box getPrevious() {
+	public Box<datatype> getPrevious() {
 		return previous;
 	}
 
-	public void setPrevious(Box previous) {
+	public void setPrevious(Box<datatype> previous) {
 		this.previous = previous;
+	}
+
+	public boolean nextNull() {
+		if(next == null) {
+			return true;
+		}
+		return false;
+	}
+	public boolean prevNull() {
+		if(previous.equals(null)) {
+			return true;
+		}
+		return false;
 	}
 
 }
