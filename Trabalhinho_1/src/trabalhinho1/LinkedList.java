@@ -85,12 +85,10 @@ public class LinkedList {
 			Box<datatype> del = searchBox(id);
 			
 			if(!this.first.equals(del)) {
-				del.getNext().setPrevious(del.getPrevious()); 
 				del.getPrevious().setNext(del.getNext());
 				count--;
 			}else {
 				del.getNext().setPrevious(null); 
-				del.getPrevious().setNext(del.getNext());
 				this.first = del.getNext();
 				count--;
 			}

@@ -20,8 +20,10 @@ public class Main {
         List1.orderdInsert(aCake);
         List2.orderdInsert(ignatciuos);
         List2.orderdInsert(cigaretteDayDream);
+       
         System.out.println(List1.search(2).getId());
         System.out.println(List2.search(3).getId());
+        
         List1.delete(2);
         List2.delete(3);
           
