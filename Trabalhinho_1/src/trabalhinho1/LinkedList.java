@@ -80,8 +80,10 @@ public class LinkedList {
 	}
 
 	public void delete(int id) throws Exception {
+		
 		if(!searchBox(id).equals(null)) {
 			Box<datatype> del = searchBox(id);
+			
 			if(!this.first.equals(del)) {
 				del.getNext().setPrevious(del.getPrevious()); 
 				del.getPrevious().setNext(del.getNext());
