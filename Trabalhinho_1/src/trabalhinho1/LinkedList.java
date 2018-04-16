@@ -1,7 +1,5 @@
 package trabalhinho1;
 
-import java.util.ArrayList;
-
 public class LinkedList {
 	private int count;
 	private Box<datatype> first;
@@ -51,7 +49,7 @@ public class LinkedList {
 
 	public void insertBefore(datatype dataIns, datatype dataAft) throws IdRegisteredException {
 		if (dataIns.getId() == dataAft.getId()) {
-			throw new IdRegisteredException();
+			throw new IdRegisteredException(dataIns.getId());
 		} else if(!this.first.equals(searchBox(dataAft.getId()))) {
 			
 			Box<datatype> current = searchBox(dataAft.getId());
@@ -79,29 +77,35 @@ public class LinkedList {
 		count++;
 	}
 
-	public void delete(int id) throws Exception {
+	public void delete(int id) throws InvalidIException {
 		
-		if(!searchBox(id).equals(null)) {
+		if(searchBox(id) != null) {
 			Box<datatype> del = searchBox(id);
 			
 			if(!this.first.equals(del)) {
 				del.getPrevious().setNext(del.getNext());
+				if(del.getNext() != null) {
+					del.setNext( del.getPrevious());
+				}
 				count--;
 			}else {
-				del.getNext().setPrevious(null); 
-				this.first = del.getNext();
+				if(count > 1) {
+					del.getNext().setPrevious(null); 
+					this.first = del.getNext();
+				}
+				this.first = null;
 				count--;
 			}
 			
 		} else {
-			throw new Exception("ID not found in list;");
+			throw new InvalidIException(id);
 		}
 		
 	}
 
 	public void insertAfter(datatype dataIns, datatype dataBef) throws IdRegisteredException {
 		if (dataIns.getId() == dataBef.getId()) {
-			throw new IdRegisteredException();
+			throw new IdRegisteredException(dataIns.getId());
 		} else {
 			Box<datatype> current = searchBox(dataBef.getId());
 			if(current.getNext() != null) {

@@ -8,24 +8,34 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
        
-    	OrderedList List1 = new OrderedList();
-        OrderedList List2 = new OrderedList();
+    	OrderedList list1 = new OrderedList();
+        OrderedList list2 = new OrderedList();
+        OrderedList list3 = new OrderedList();
+        
 
         Person gerso = new Person(1, "gerso");
         Person ignatciuos = new Person( 3, "Ignatcious");
         CakeClass aCake = new CakeClass(2, true);
-           CakeClass cigaretteDayDream = new CakeClass(4, true);
+        CakeClass cigaretteDayDream = new CakeClass(4, true);
 
-        List1.orderdInsert(gerso);
-        List1.orderdInsert(aCake);
-        List2.orderdInsert(ignatciuos);
-        List2.orderdInsert(cigaretteDayDream);
-       
-        System.out.println(List1.search(2).getId());
-        System.out.println(List2.search(3).getId());
+        list1.orderdInsert(gerso);
+        list1.orderdInsert(aCake);
+        list2.orderdInsert(ignatciuos);
+        list2.orderdInsert(cigaretteDayDream);
+        list1.orderdInsert(ignatciuos);
+        list1.orderdInsert(aCake);
+        list1.orderdInsert(cigaretteDayDream);
+        list3.orderdInsert(aCake);
         
-        List1.delete(2);
-        List2.delete(3);
+        System.out.println(list1.search(2).getId());
+        System.out.println(list2.search(3).getId());
+        
+        list1.delete(2);
+        list2.delete(3);
+        list1.search(2);
+        list2.search(3);
+        list3.delete(2);
+        list1.delete(2);
           
         
     }

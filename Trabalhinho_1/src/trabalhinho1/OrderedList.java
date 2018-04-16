@@ -9,14 +9,18 @@ public class OrderedList {
 	}
 	
 	public datatype search(int id ) {
-		return list.searchData(id);
+		datatype found = list.searchData(id);
+		if(found == null) {
+			System.out.println("ID '"+id+"' not found in list.");
+		}
+		return found;
 	}
 	
 	private Box<datatype> searchBox(int id) {
 		return list.searchBox(id);
 	}
 
-	public void orderdInsert(datatype data) throws IdRegisteredException {
+	public void orderdInsert(datatype data) {
 		if(list.getCount() != 0) {
 			Box<datatype> current = list.getFirst();
 			
@@ -24,9 +28,17 @@ public class OrderedList {
 				current = current.getNext();
 			}
 			if(current.nextNull()) {
-				list.insertAfter(data, current.getData());
+				try {
+					list.insertAfter(data, current.getData());
+				} catch (IdRegisteredException e) {
+					System.out.println(e.getMessage());
+				}
 			}else {
-				list.insertBefore(data, current.getData());
+				try {
+					list.insertBefore(data, current.getData());
+				} catch (IdRegisteredException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		else {
@@ -35,8 +47,12 @@ public class OrderedList {
 		
 	}
 
-	public void delete(int id) throws Exception {
-		list.delete(id);
+	public void delete(int id) {
+		try {
+			list.delete(id);
+		} catch (InvalidIException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
