@@ -72,10 +72,3 @@ public class Hash {
 		}
 	}
 }
-	
-	
-	
-	
-	
-
-
