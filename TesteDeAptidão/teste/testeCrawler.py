@@ -1,13 +1,13 @@
-
 from bs4 import BeautifulSoup
 from urllib.request import urlopen as uReq
-
 
 listaTitulos = []
 listaVizu = []
 listaFinal = []
+
 def processamentoListas(listaTitulos, listaVizu):
 
+    #Organiza a listas listas pelo numero de vizualizacoes
     for j in range(0, listaVizu.__len__() -1):
         for i in range(0, listaVizu.__len__() -1):
             if (listaVizu[i] < listaVizu[i+1]):
@@ -19,8 +19,9 @@ def processamentoListas(listaTitulos, listaVizu):
                 listaTitulos[i+1] = temp2
     
     x = 0
+    #Junta os titulos as visualizacoes dos respectivos videos
     for nome in listaTitulos:
-        listaFinal.append (listaTitulos[x] + " - " + str(listaVizu[x]))
+        listaFinal.append(listaTitulos[x] + " - " + str(listaVizu[x]))
         x+=1
     
     return listaFinal       
@@ -39,12 +40,15 @@ def videoCrawler():
 
     for group in soup.findAll("div", {'class': 'yt-lockup-content'}):
         
-        #putamerda
+        #Adcionando nome do video na lista de titulos
         listaTitulos.append(group.h3.a.get('title'))
         
+        #retira-se os elementos da string que nao sao numeros, para poder converter para int
         aManipular = (group.ul.li.find_next().text)
         aManipular = aManipular.replace(' visualizações', '')
         aManipular = aManipular.replace('.', '')
+        
+        #adciona a string ja convertida em int
         listaVizu.append(int(aManipular))
         
     processamentoListas(listaTitulos, listaVizu)
@@ -57,5 +61,6 @@ def videoCrawler():
 try :
     videoCrawler()
 except AttributeError:
-    videoCrawler()       
+    videoCrawler()
+         
 

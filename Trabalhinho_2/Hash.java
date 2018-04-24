@@ -1,5 +1,3 @@
-package exe;
-
 public class Hash {
 	
 	public int[] arrayNext;
@@ -45,9 +43,7 @@ public class Hash {
 	
 	}
 	
-	public void cu() {
-		
-	}
+	
 	
 	
 	
