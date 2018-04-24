@@ -1,23 +1,31 @@
+package trabalhinho2;
+
 public class Hash {
 	
 	public int[] arrayNext;
 	public int[] arrayData;
-	public int groupNum;
+	public int tamanhoEspalhamento;
 
 	
-	public Hash(int groupNum, int size) {
+	public Hash(int tamanhoEspalhamento, int size) {
 		
-		this.groupNum = groupNum;
+		this.tamanhoEspalhamento = tamanhoEspalhamento;
 		arrayNext = new int[size];
 		arrayData = new int[size];
 		
-		for(int i = 0; i < arrayNext.length; i++) {
-			arrayNext[i] = -1;
+		for(int i = tamanhoEspalhamento; i < arrayNext.length; i++) {
+			
+			if (i+1 < arrayNext.length) {
+				arrayNext[i] = i+1;
+			} else {
+				arrayNext[i] = -1;
+			}
+				
 		}
 	}
 	
 	public int funcHash(int id) {
-		return id % groupNum;
+		return id % tamanhoEspalhamento;
 	}
 	
 	public void insert(int num) {
