@@ -68,7 +68,19 @@ public class Hash {
 			arrayNext[key] = firstFree;
 		
 		} else {
-			System.out.println("Hash full dumb fuck");
+			System.out.println("Hash full dumb frick");
 		}
+	}
+	public void delete(int num) {
+		int key = funcHash(num);
+		int next = arrayNext[key];
+		
+		// percorre vendo se o dado a deletar é referenciado por algum antes dele, e se sim, faz o mesmo referenciar o próximo do num a deletar
+		for(int i = 0; i < arrayNext.length; i++) {
+			if(arrayNext[i] == num) {
+				arrayNext[i] = next;
+			}
+		}
+		arrayNext[key] = -2;
 	}
 }
