@@ -18,7 +18,7 @@ public class Hash {
 		arrayData = new int[size];
 		this.firstFree = tamanhoEspalhamento +1;
 		
-		for (int i = 0; i > tamanhoEspalhamento; i++) {
+		for (int i = 0; i < tamanhoEspalhamento; i++) {
 			arrayNext[i] = -2;
 		}
 		
@@ -38,27 +38,33 @@ public class Hash {
 	
 	public boolean search(int num) {
 		
-		boolean found = false;
+		
 		int current = funcHash(num);
+		
 		
 		while (current != -1) {
 			
-			if (arrayData[current] == num) {
-				found = true;
+			if(arrayNext[current] != -2) {
+				return false;
+			
+			}else if (arrayData[current] == num) {
+				return true;
 			} else {
 				current = arrayNext[current];
 			}
 		 }
-		return found;
+		return false;
 	}
 	
 	public void insert(int num) {
 		
 		int key = funcHash(num);
 		
+
 		if (arrayNext[key] == -2) {
 			arrayData[key] = num;
 			arrayNext[key] = -1;
+
 		} else if(firstFree != -2) {
 
 			arrayData[firstFree] = num;
@@ -68,10 +74,11 @@ public class Hash {
 			arrayNext[key] = firstFree;
 		
 		} else {
-			System.out.println("Hash full dumb frick");
+			System.out.println("Hash full");
 		}
 	}
 	public void delete(int num) {
+		
 		int key = funcHash(num);
 		int next = arrayNext[key];
 		
