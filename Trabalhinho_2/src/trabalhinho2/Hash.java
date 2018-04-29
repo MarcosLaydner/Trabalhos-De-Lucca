@@ -44,7 +44,7 @@ public class Hash {
 		
 		while (current != -1) {
 			
-			if(arrayNext[current] != -2) {
+			if(arrayNext[current] == -2) {
 				return false;
 			
 			}else if (arrayData[current] == num) {
