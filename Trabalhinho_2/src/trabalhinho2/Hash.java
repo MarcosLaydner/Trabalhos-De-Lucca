@@ -78,20 +78,35 @@ public class Hash {
 		}
 	}
 	public void delete(int num) {
-		
+		boolean first = true;
 		int key = funcHash(num);
-		int next = arrayNext[key];
-		
-		// percorre vendo se o dado a deletar é referenciado por algum antes dele, e se sim, faz o mesmo referenciar o próximo do num a deletar
-		for(int i = 0; i < arrayNext.length; i++) {
-			if(arrayNext[i] == num) {
-				if(arrayNext[key] != -1) {
-					arrayNext[i] = next;
-				}
-				arrayNext[i] = -2;
-				i+= (arrayNext.length + 1);
+		int prevKey = key;
+		if(arrayNext[key] == -1) {
+			if(arrayData[key] == num) {
+				arrayNext[key] = -2;
+			}
+			else {
+				System.out.println("Number not found for deletion");
 			}
 		}
-		arrayNext[key] = -2;
+		else {
+			while (key != -1) {
+				
+				if(arrayNext[key] == -2) {
+					System.out.println("Number not found for deletion");
+				
+				}else if (arrayData[key] == num) {
+					if(first) {
+						arrayNext[prevKey] = arrayNext[key];
+						arrayNext[key] = arrayNext[arrayNext[key]];
+					}
+					arrayNext[key] = arrayNext[arrayNext[key]];
+				} else {
+					first = false;
+					prevKey = key;
+					key = arrayNext[key];
+				}
+			 }
+		}
 	}
 }
