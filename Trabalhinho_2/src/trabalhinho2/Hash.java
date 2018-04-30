@@ -94,13 +94,19 @@ public class Hash {
 				
 				if(arrayNext[key] == -2) {
 					System.out.println("Number not found for deletion");
+					key = -1;
 				
 				}else if (arrayData[key] == num) {
 					if(first) {
-						arrayNext[prevKey] = arrayNext[key];
+						arrayData[key] =  arrayData[arrayNext[key]];
 						arrayNext[key] = arrayNext[arrayNext[key]];
+					}else {
+						
+						arrayNext[prevKey] = arrayNext[key];
+						if(arrayNext[key] != -1) {
+							arrayNext[key] = arrayNext[arrayNext[key]];
+						}	
 					}
-					arrayNext[key] = arrayNext[arrayNext[key]];
 				} else {
 					first = false;
 					prevKey = key;
