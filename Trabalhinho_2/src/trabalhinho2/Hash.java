@@ -85,7 +85,11 @@ public class Hash {
 		// percorre vendo se o dado a deletar é referenciado por algum antes dele, e se sim, faz o mesmo referenciar o próximo do num a deletar
 		for(int i = 0; i < arrayNext.length; i++) {
 			if(arrayNext[i] == num) {
-				arrayNext[i] = next;
+				if(arrayNext[key] != -1) {
+					arrayNext[i] = next;
+				}
+				arrayNext[i] = -2;
+				i+= (arrayNext.length + 1);
 			}
 		}
 		arrayNext[key] = -2;
