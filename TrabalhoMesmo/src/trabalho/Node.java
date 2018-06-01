@@ -2,14 +2,17 @@ package trabalho;
 
 public class Node {
 	
+	private int data;
 	private Node parent;
 	private Node lSon;
 	private Node rSon;
+	private int balance;
 	
-	public Node(Node parent) {
+	public Node(int data, Node parent) {
 		this.parent = parent;
 		this.lSon = null;
 		this.rSon = null;
+		this.setBalance(0);
 	}
 	
 	public Node getParent() {
@@ -29,6 +32,22 @@ public class Node {
 	}
 	public void setlSon(Node lSon) {
 		this.lSon = lSon;
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 	
 }
