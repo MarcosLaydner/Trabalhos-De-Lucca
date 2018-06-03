@@ -1,5 +1,7 @@
 package trabalho;
 
+import java.util.ArrayList;
+
 public class AVLTree {
 	
 	private Node root;
@@ -256,5 +258,21 @@ public class AVLTree {
 		node.setBalance(height(node.getrSon()) - height(node.getlSon()));
 	}
 	
+	//pra testar
+	
+	public ArrayList<Node> inOrder() {
+		ArrayList<Node> show = new ArrayList<Node>();
+		inOrder(this.root,show);
+		return show;
+	}
+	
+	private void inOrder(Node node, ArrayList<Node> show) {
+		if (node == null) {
+			return;
+		}
+		inOrder(node.getlSon(), show);
+		show.add(node);
+		inOrder(node.getrSon(), show);
+	}
 	
 }
