@@ -50,8 +50,90 @@ public class AVLTree {
             }
         }
     }
+	
+	public void delete(int data) {
+		try {
+			findToDelete(this.root,data);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
-	public void checkBalance( Node current) {
+	private void findToDelete(Node current, int data) throws Exception{
+		if (current == null) {
+			throw new Exception("The item doesn't exist");
+		} else {
+			
+			if (data < current.getData()) {
+				findToDelete(current.getlSon(), data);
+			
+			} else if(data > current.getData()) {
+				findToDelete(current.getrSon(), data);
+			
+			} else if(data == current.getData()) {
+				remove(current);
+			}
+		}
+	}
+	
+	private void remove(Node toRemove) {
+		Node r;
+		
+		if (toRemove.getlSon() == null || toRemove.getrSon() == null) {
+			
+			if (toRemove.getParent() == null) {
+				this.root = null;
+				toRemove = null;
+				return;
+			}
+			r = toRemove;
+		} else {
+			r = replacer(toRemove);
+			toRemove.setData(r.getData());
+		}
+		
+		Node p;
+		if (r.getlSon() != null) {
+			p = r.getlSon();
+		} else {
+			p = r.getrSon();
+		}
+		
+		if (r.getParent() == null) {
+			this.root = p;
+		} else {
+			
+			if (r == r.getParent().getlSon()) {
+				r.getParent().setlSon(p);
+			
+			} else {
+				r.getParent().setrSon(p);
+			}
+			
+			checkBalance(r.getParent());
+		}
+		r = null;
+	}
+	
+	private Node replacer(Node node) {
+		
+		if (node.getrSon() != null) {
+			Node r = node.getrSon();
+			while (r.getlSon() != null) {
+				r = r.getlSon();
+			}
+			return r;
+		} else {
+			Node p = node.getParent();
+			while(p != null && node == p.getrSon()) {
+				node = p;
+				p = node.getParent();
+			}
+			return p;
+		}
+	}
+	
+	private void checkBalance( Node current) {
 		setBalance(current);
 		int balance = current.getBalance();
 		
@@ -85,8 +167,31 @@ public class AVLTree {
 	}
 
 	private Node leftRotation(Node current) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Node right = current.getrSon();
+		right.setParent(current.getParent());
+		current.setrSon(right.getlSon());
+		
+		if (current.getrSon() != null) {
+			current.getrSon().setParent(current);
+		}
+		right.setlSon(current);
+		current.setParent(right);
+		
+		if(right.getParent() != null) {
+			
+			if (right.getParent().getrSon() == current) {
+				right.getParent().setrSon(right);
+			
+			} else if(right.getParent().getlSon() == current) {
+				right.getParent().setlSon(right);
+			}
+		}
+		
+		setBalance(current);
+		setBalance(right);
+		
+		return right;
 	}
 
 
