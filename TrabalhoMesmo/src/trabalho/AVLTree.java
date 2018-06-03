@@ -196,20 +196,43 @@ public class AVLTree {
 
 
 	private Node doubleRightLeftRotation(Node current) {
-		// TODO Auto-generated method stub
-		return null;
+		current.setrSon(rightRotation(current.getrSon()));
+		return leftRotation(current);
 	}
 
 
 	private Node doubleRotationLeftRight(Node current) {
-		// TODO Auto-generated method stub
-		return null;
+		current.setlSon(leftRotation(current.getlSon()));
+		return rightRotation(current);
 	}
 
 
 	private Node rightRotation(Node current) {
-		// TODO Auto-generated method stub
-		return null;
+		Node left = current.getlSon();
+		left.setParent(current.getParent());
+		current.setlSon(left.getrSon());
+		
+		if (current.getlSon() != null) {
+			current.getlSon().setParent(current);
+		}
+		
+		left.setrSon(current);
+		current.setParent(left);
+		
+		if(left.getParent() != null) {
+			
+			if(left.getParent().getrSon() == current) {
+				left.getParent().setrSon(left);
+			
+			}else if(left.getParent().getlSon() == current) {
+				left.getParent().setlSon(left);
+			}
+		}
+		
+		setBalance(current);
+		setBalance(left);
+		
+		return left;
 	}
 
 
