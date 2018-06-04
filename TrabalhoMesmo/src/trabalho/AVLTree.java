@@ -140,7 +140,7 @@ public class AVLTree {
 		int balance = current.getBalance();
 		
 		// se desbalanceado para esquerda
-		if(balance == -2) {
+		if(balance <= -2) {
 			
 			// checar a altura dos filhos do filho a esquerda da raiz desbalanceada, 
 			// para saber se sera uma rotatcao simple para a direita
@@ -152,7 +152,7 @@ public class AVLTree {
 			}
 		
 			// se desbalanceado para direita	
-		} else if(balance == 2) {
+		} else if(balance >= 2) {
 			
 			if (height(current.getrSon().getrSon()) >= height(current.getrSon().getlSon())) {
 				current = leftRotation(current);
