@@ -94,22 +94,25 @@ public class AVLTree {
 			toRemove.setData(r.getData());
 		}
 		
-		Node p;
+		Node son;
 		if (r.getlSon() != null) {
-			p = r.getlSon();
+			son = r.getlSon();
 		} else {
-			p = r.getrSon();
+			son = r.getrSon();
+		}
+		if(son != null) {
+			son.setParent(r.getParent());
 		}
 		
 		if (r.getParent() == null) {
-			this.root = p;
+			this.root = son;
 		} else {
 			
 			if (r == r.getParent().getlSon()) {
-				r.getParent().setlSon(p);
+				r.getParent().setlSon(son);
 			
 			} else {
-				r.getParent().setrSon(p);
+				r.getParent().setrSon(son);
 			}
 			
 			checkBalance(r.getParent());
