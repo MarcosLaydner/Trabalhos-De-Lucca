@@ -240,7 +240,20 @@ public class AVLTree {
 		return left;
 	}
 
-
+	public boolean search(int data){
+		Node current = root;
+		while(current!=null){
+			if(current.getData() == data){
+				return true;
+			}else if(current.getData()> data){
+				current = current.getlSon();
+			}else{
+				current = current.getrSon();
+			}
+		}
+		return false;
+	}
+	
 	private int height(Node current) {
 		if(current == null) {
 			return -1;
