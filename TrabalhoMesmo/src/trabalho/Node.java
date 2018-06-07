@@ -7,7 +7,11 @@ public class Node {
 	private Node lSon;
 	private Node rSon;
 	private int balance;
-	
+	/**
+	*Construtor da classe nó. Recebe nó pai, e dado do nó, utilizando-os para inicializar as respectivas variáveis,
+	*além de inicializar os filhos, como nulos.
+	*@param data, parent //dado, e nó pai
+	**/
 	public Node(int data, Node parent) {
 		this.parent = parent;
 		this.lSon = null;
