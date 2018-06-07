@@ -5,7 +5,10 @@ import java.util.ArrayList;
 public class AVLTree {
 	
 	private Node root;
-	
+	/**
+	*Construtor da classe árvore, recebe raíz, e inicializa o atributo root com este valor.
+	*@param root
+	**/
 	public AVLTree(Node root) {
 		this.root = root;
 	}
