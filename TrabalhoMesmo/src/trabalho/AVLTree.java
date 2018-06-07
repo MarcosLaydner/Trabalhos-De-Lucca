@@ -10,7 +10,13 @@ public class AVLTree {
 		this.root = root;
 	}
 	
-	
+	/**
+	*Insere Folha com o dado fornecido, caso não haja duplicatas. Caso haja, manda para o console a mensagem.
+	*passa parâmetro data para o método recursivo insert(Node, int)
+	*
+	*@param data //dado a ser adicionado
+	*
+	**/
 	public void insert(int data) {
 		try {
 			insert(this.root, data);
@@ -18,7 +24,12 @@ public class AVLTree {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+	/**
+	*método interno de inserção, fazendo comparações com recursão, até chegar ao destino para inserir a folha.
+	*Finalmente, confere o balanceamento da árvore.
+	*
+	*@param root, data //Éfornecido então o nó, e o dado a ser adicionado, nó é avançado a cada camada de recursão.
+	**/
 	private void insert(Node root, int data) throws Exception {
         
         if (root == null) {
@@ -48,11 +59,17 @@ public class AVLTree {
                 
                 
             } else {
-                throw new Exception("Tree items mus be unique");
+                throw new Exception("Tree items must be unique");
             }
         }
     }
-	
+	/**
+	*método público de deleção, invoca o método interno recursivo, passando o dado
+	*Caso não exista dado solicitado na árvore, passa exceção condizente.
+	*
+	*@param data //dado a ser removido da árvore
+	*
+	**/
 	public void delete(int data) {
 		try {
 			findToDelete(this.root,data);
@@ -60,7 +77,13 @@ public class AVLTree {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	/**
+	*Método interno de deleção, achar para deletar. É recursivo, percorre a árvore até achar o item a ser deletado,
+	*invocando então o método remove(Node). Caso o item não exista, transmite exceção
+	*
+	*
+	*@param current, data //atual nó e dado a ser removido.
+	**/
 	private void findToDelete(Node current, int data) throws Exception{
 		if (current == null) {
 			throw new Exception("The item doesn't exist");
@@ -77,7 +100,13 @@ public class AVLTree {
 			}
 		}
 	}
-	
+	/**
+	*Avalia os critérios de remoção, consultando o estado do nó a ser removido, resolvendo as pendências caso
+	*o mesmo tenha filhos. Também checa o balanceamento da árvore.
+	*
+	*
+	*@param toRemove //nó a ser removido
+	**/
 	private void remove(Node toRemove) {
 		Node r;
 		
@@ -119,7 +148,13 @@ public class AVLTree {
 		}
 		r = null;
 	}
-	
+	/**
+	*Método de substituição de nós para fins de remoção, caso o nó a ser removido tenha mais de um filho.
+	*faz as comparações e retorna o filho ótimo a se tornar raíz.
+	*
+	*@param node
+	*@return Node 
+	**/
 	private Node replacer(Node node) {
 		
 		if (node.getrSon() != null) {
@@ -137,7 +172,13 @@ public class AVLTree {
 			return p;
 		}
 	}
-	
+	/**
+	*Método de checagem do balanceamento da árvore, recebe como parâmetro o nó atual
+	*faz conferimento do status da árvore, avaliando também ações necessárias para a correção, caso haja desbalanceamento
+	*invoca os métodos rightRotation(current), doubleRightRotationLeftRight(current) leftRotation(current) doubleRightLeftRotation(current)
+	*conforme necessário 
+	*
+	**/
 	private void checkBalance( Node current) {
 		setBalance(current);
 		int balance = current.getBalance();
@@ -154,7 +195,7 @@ public class AVLTree {
 				current = doubleRotationLeftRight(current);
 			}
 		
-			// se desbalanceado para direita	
+		// se desbalanceado para direita	
 		} else if(balance >= 2) {
 			
 			if (height(current.getrSon().getrSon()) >= height(current.getrSon().getlSon())) {
