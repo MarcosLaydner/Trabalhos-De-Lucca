@@ -177,7 +177,7 @@ public class AVLTree {
 	*faz conferimento do status da árvore, avaliando também ações necessárias para a correção, caso haja desbalanceamento
 	*invoca os métodos rightRotation(current), doubleRightRotationLeftRight(current) leftRotation(current) doubleRightLeftRotation(current)
 	*conforme necessário 
-	*
+	*@param current //nó atual
 	**/
 	private void checkBalance( Node current) {
 		setBalance(current);
@@ -211,7 +211,11 @@ public class AVLTree {
 			this.root = current;
 		}
 	}
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação para a esquerda
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node leftRotation(Node current) {
 		
 		Node right = current.getrSon();
@@ -240,19 +244,32 @@ public class AVLTree {
 		return right;
 	}
 
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação dupla, direita e esquerda
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node doubleRightLeftRotation(Node current) {
 		current.setrSon(rightRotation(current.getrSon()));
 		return leftRotation(current);
 	}
 
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação dupla, esquerda e direita
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node doubleRotationLeftRight(Node current) {
 		current.setlSon(leftRotation(current.getlSon()));
 		return rightRotation(current);
 	}
 
 
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação para a direita
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node rightRotation(Node current) {
 		Node left = current.getlSon();
 		left.setParent(current.getParent());
@@ -280,7 +297,12 @@ public class AVLTree {
 		
 		return left;
 	}
-
+	/**
+	*Método de busca, percorre a árvore para encontrar o nó com dado requisitado
+	*retorna verdadeiro caso encontre, e falso caso não
+	*@param data //dado a ser buscado
+	*@return boolean
+	**/
 	public boolean search(int data){
 		Node current = root;
 		while(current!=null){
@@ -294,7 +316,12 @@ public class AVLTree {
 		}
 		return false;
 	}
-	
+	/**
+	*Método recursivo de determinação de altura, ou profundidade da árvore a partir de um nó fornecido.
+	*A cada camada de recursão, avança-se um nó, e adiciona-se 1 à altura total
+	*@param current //nó atual
+	*@return int
+	**/
 	private int height(Node current) {
 		if(current == null) {
 			return -1;
@@ -310,19 +337,32 @@ public class AVLTree {
 			return 1 + Math.max(height(current.getrSon()), height(current.getlSon()));
 		}
 	}
-	
+	/**
+	*Método que deremina o nível de balanço de um determinado nó, invocando método de cálculo de altura.
+	*
+	*@param node //nó a ser calculado
+	**/
 	private void setBalance(Node node) {
 		node.setBalance(height(node.getrSon()) - height(node.getlSon()));
 	}
 	
-	//pra testar
-	
+	/**
+	*Métodos para teste, criando um ArrayList de nós com a árvore.
+	*
+	*
+	*@return ArrayList<Node>
+	**/
 	public ArrayList<Node> inOrder() {
 		ArrayList<Node> show = new ArrayList<Node>();
 		inOrder(this.root,show);
 		return show;
 	}
-	
+	/**
+	*Métodos para teste, criando um ArrayList de nós com a árvore.
+	*
+	*@param node, show
+	*
+	**/
 	private void inOrder(Node node, ArrayList<Node> show) {
 		if (node == null) {
 			return;
