@@ -1,5 +1,7 @@
 package trabalho;
 
+import java.util.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -10,6 +12,7 @@ public class Main {
 		tree.insert(50);
 		tree.insert(12);
 		
+		System.out.println(Arrays.toString(tree.toInt()));
 
 	}
 

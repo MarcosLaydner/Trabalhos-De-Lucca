@@ -17,6 +17,7 @@ public class Node {
 		this.lSon = null;
 		this.rSon = null;
 		this.setBalance(0);
+		this.data = data;
 	}
 	
 	public Node getParent() {
