@@ -355,6 +355,16 @@ public class AVLTree {
 	*
 	*@return ArrayList<Node>
 	**/
+	public int[] show(ArrayList<Node> list) {
+		int[] toPrint = new int[list.size()];
+		
+		for (int i = 0; i > list.size(); i++) {
+			toPrint[i] = list.get(i).getData();
+		}
+		
+		return toPrint;
+	}
+	
 	public ArrayList<Node> inOrder() {
 		ArrayList<Node> show = new ArrayList<Node>();
 		inOrder(this.root,show);

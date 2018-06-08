@@ -3,7 +3,13 @@ package trabalho;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		AVLTree tree = new AVLTree(new Node(23, null));
+		
+		tree.insert(203);
+		tree.insert(100);
+		tree.insert(50);
+		tree.insert(12);
+		
 
 	}
 
