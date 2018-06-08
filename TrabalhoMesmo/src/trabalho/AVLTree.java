@@ -359,7 +359,7 @@ public class AVLTree {
 		ArrayList<Node> list = inOrder();
 		int[] toPrint = new int[(int)list.size()];
 		
-		for (int i = 0; i > list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			toPrint[i] = list.get(i).getData();
 		}
 		
