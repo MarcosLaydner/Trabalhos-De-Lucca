@@ -5,12 +5,21 @@ import java.util.ArrayList;
 public class AVLTree {
 	
 	private Node root;
-	
+	/**
+	*Construtor da classe árvore, recebe raíz, e inicializa o atributo root com este valor.
+	*@param root
+	**/
 	public AVLTree(Node root) {
 		this.root = root;
 	}
 	
-	
+	/**
+	*Insere Folha com o dado fornecido, caso não haja duplicatas. Caso haja, manda para o console a mensagem.
+	*passa parâmetro data para o método recursivo insert(Node, int)
+	*
+	*@param data //dado a ser adicionado
+	*
+	**/
 	public void insert(int data) {
 		try {
 			insert(this.root, data);
@@ -18,7 +27,12 @@ public class AVLTree {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+	/**
+	*método interno de inserção, fazendo comparações com recursão, até chegar ao destino para inserir a folha.
+	*Finalmente, confere o balanceamento da árvore.
+	*
+	*@param root, data //Éfornecido então o nó, e o dado a ser adicionado, nó é avançado a cada camada de recursão.
+	**/
 	private void insert(Node root, int data) throws Exception {
         
         if (root == null) {
@@ -48,11 +62,17 @@ public class AVLTree {
                 
                 
             } else {
-                throw new Exception("Tree items mus be unique");
+                throw new Exception("Tree items must be unique");
             }
         }
     }
-	
+	/**
+	*método público de deleção, invoca o método interno recursivo, passando o dado
+	*Caso não exista dado solicitado na árvore, passa exceção condizente.
+	*
+	*@param data //dado a ser removido da árvore
+	*
+	**/
 	public void delete(int data) {
 		try {
 			findToDelete(this.root,data);
@@ -60,7 +80,13 @@ public class AVLTree {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	/**
+	*Método interno de deleção, achar para deletar. É recursivo, percorre a árvore até achar o item a ser deletado,
+	*invocando então o método remove(Node). Caso o item não exista, transmite exceção
+	*
+	*
+	*@param current, data //atual nó e dado a ser removido.
+	**/
 	private void findToDelete(Node current, int data) throws Exception{
 		if (current == null) {
 			throw new Exception("The item doesn't exist");
@@ -77,7 +103,13 @@ public class AVLTree {
 			}
 		}
 	}
-	
+	/**
+	*Avalia os critérios de remoção, consultando o estado do nó a ser removido, resolvendo as pendências caso
+	*o mesmo tenha filhos. Também checa o balanceamento da árvore.
+	*
+	*
+	*@param toRemove //nó a ser removido
+	**/
 	private void remove(Node toRemove) {
 		Node r;
 		
@@ -119,7 +151,13 @@ public class AVLTree {
 		}
 		r = null;
 	}
-	
+	/**
+	*Método de substituição de nós para fins de remoção, caso o nó a ser removido tenha mais de um filho.
+	*faz as comparações e retorna o filho ótimo a se tornar raíz.
+	*
+	*@param node
+	*@return Node 
+	**/
 	private Node replacer(Node node) {
 		
 		if (node.getrSon() != null) {
@@ -137,7 +175,13 @@ public class AVLTree {
 			return p;
 		}
 	}
-	
+	/**
+	*Método de checagem do balanceamento da árvore, recebe como parâmetro o nó atual
+	*faz conferimento do status da árvore, avaliando também ações necessárias para a correção, caso haja desbalanceamento
+	*invoca os métodos rightRotation(current), doubleRightRotationLeftRight(current) leftRotation(current) doubleRightLeftRotation(current)
+	*conforme necessário 
+	*@param current //nó atual
+	**/
 	private void checkBalance( Node current) {
 		setBalance(current);
 		int balance = current.getBalance();
@@ -154,7 +198,7 @@ public class AVLTree {
 				current = doubleRotationLeftRight(current);
 			}
 		
-			// se desbalanceado para direita	
+		// se desbalanceado para direita	
 		} else if(balance >= 2) {
 			
 			if (height(current.getrSon().getrSon()) >= height(current.getrSon().getlSon())) {
@@ -170,7 +214,11 @@ public class AVLTree {
 			this.root = current;
 		}
 	}
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação para a esquerda
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node leftRotation(Node current) {
 		
 		Node right = current.getrSon();
@@ -199,19 +247,32 @@ public class AVLTree {
 		return right;
 	}
 
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação dupla, direita e esquerda
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node doubleRightLeftRotation(Node current) {
 		current.setrSon(rightRotation(current.getrSon()));
 		return leftRotation(current);
 	}
 
-
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação dupla, esquerda e direita
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node doubleRotationLeftRight(Node current) {
 		current.setlSon(leftRotation(current.getlSon()));
 		return rightRotation(current);
 	}
 
 
+	/**
+	*Um dos movimentos para balanceamento da árvore, rotação para a direita
+	*Estes métodos invocam o método setBalance(Node), que determina o nível de balanço.
+	*@param current //nó atual
+	**/
 	private Node rightRotation(Node current) {
 		Node left = current.getlSon();
 		left.setParent(current.getParent());
@@ -239,7 +300,12 @@ public class AVLTree {
 		
 		return left;
 	}
-
+	/**
+	*Método de busca, percorre a árvore para encontrar o nó com dado requisitado
+	*retorna verdadeiro caso encontre, e falso caso não
+	*@param data //dado a ser buscado
+	*@return boolean
+	**/
 	public boolean search(int data){
 		Node current = root;
 		while(current!=null){
@@ -253,7 +319,12 @@ public class AVLTree {
 		}
 		return false;
 	}
-	
+	/**
+	*Método recursivo de determinação de altura, ou profundidade da árvore a partir de um nó fornecido.
+	*A cada camada de recursão, avança-se um nó, e adiciona-se 1 à altura total
+	*@param current //nó atual
+	*@return int
+	**/
 	private int height(Node current) {
 		if(current == null) {
 			return -1;
@@ -269,19 +340,32 @@ public class AVLTree {
 			return 1 + Math.max(height(current.getrSon()), height(current.getlSon()));
 		}
 	}
-	
+	/**
+	*Método que deremina o nível de balanço de um determinado nó, invocando método de cálculo de altura.
+	*
+	*@param node //nó a ser calculado
+	**/
 	private void setBalance(Node node) {
 		node.setBalance(height(node.getrSon()) - height(node.getlSon()));
 	}
 	
-	//pra testar
-	
+	/**
+	*Métodos para teste, criando um ArrayList de nós com a árvore.
+	*
+	*
+	*@return ArrayList<Node>
+	**/
 	public ArrayList<Node> inOrder() {
 		ArrayList<Node> show = new ArrayList<Node>();
 		inOrder(this.root,show);
 		return show;
 	}
-	
+	/**
+	*Métodos para teste, criando um ArrayList de nós com a árvore.
+	*
+	*@param node, show
+	*
+	**/
 	private void inOrder(Node node, ArrayList<Node> show) {
 		if (node == null) {
 			return;
