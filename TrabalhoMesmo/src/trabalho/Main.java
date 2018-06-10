@@ -11,6 +11,10 @@ public class Main {
 		tree.insert(100);
 		tree.insert(50);
 		tree.insert(12);
+		tree.insert(24);
+		tree.insert(302);
+		tree.insert(3);
+		tree.insert(142);
 		System.out.println(tree.search(100));
 		
 		System.out.println(Arrays.toString(tree.toInt()));
